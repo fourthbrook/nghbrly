@@ -1,4 +1,4 @@
-package com.nghbrly;
+package com.andrewbrook.nghbrly;
 
 import com.facebook.react.ReactActivity;
 

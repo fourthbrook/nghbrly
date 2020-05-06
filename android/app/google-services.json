@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "793434755158",
+    "firebase_url": "https://nghbrly-ab92.firebaseio.com",
+    "project_id": "nghbrly-ab92",
+    "storage_bucket": "nghbrly-ab92.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793434755158:android:19a8ca5e65564d1369abf7",
+        "android_client_info": {
+          "package_name": "com.andrewbrook.nghbrly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793434755158-60elmcscqjiq0lj6p9j8cnahtblfjgn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andrewbrook.nghbrly",
+            "certificate_hash": "51d450e1eadfe7e0f99f3fecf707e0bd6c845623"
+          }
+        },
+        {
+          "client_id": "793434755158-4jdah5uu1qfmiekdjrm4ooc3cs8bivoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF7-PsTc6PdSYQPSMZHXhWALUgg_976G4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793434755158-4jdah5uu1qfmiekdjrm4ooc3cs8bivoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
