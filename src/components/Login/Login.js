@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, ActivityIndicator, View, Text, Alert } from 'react-native';
-import { Button, Input, Icon } from 'react-native-elements';
+import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions  } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
 export default function Login({ navigation }) {
+
+    const homeHandler = () => {
+        navigation.navigate('Home');
+    }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +21,7 @@ export default function Login({ navigation }) {
             const doLogin = await auth().signInWithEmailAndPassword(email, password);
             setShowLoading(false);
             if(doLogin.user) {
-                navigation.navigate('Home');
+                homeHandler
             }
         } catch (e) {
             setShowLoading(false);
@@ -27,87 +33,85 @@ export default function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{ fontSize: 28, height: 50  }}>Please Login!</Text>
-                </View>
-                <View style={styles.subContainer}>
-                    <Input
-                        style={styles.textInput}
+            <View style={styles.logo}>
+                <Text style={styles.logoText}>
+                    nghbrly
+                </Text>
+            </View>
+            <View style={styles.login}>
+                <View style={styles.form}>
+                    <Image
+                        style={{ width: 25, height: 25, marginRight: 10}}
+                        source={require('../../images/icons/email.png')}
+                    />
+                    <TextInput
+                        style={styles.input}
                         placeholder='Your Email'
-                        leftIcon={
-                            <Icon
-                            name='mail'
-                            size={24}
-                            />
-                        }
+                        placeholderTextColor='white'
                         value={email}
                         onChangeText={setEmail}
                     />
                 </View>
-                <View style={styles.subContainer}>
-                    <Input
-                        style={styles.textInput}
+                <View style={styles.form}>
+                    <Image
+                        style={{ width: 25, height: 25, marginRight: 10}}
+                        source={require('../../images/icons/key.png')}
+                    />
+                    <TextInput
+                        style={styles.input}
                         placeholder='Your Password'
-                        leftIcon={
-                            <Icon
-                            name='lock'
-                            size={24}
-                            />
-                        }
+                        placeholderTextColor='white'
                         secureTextEntry={true}
                         value={password}
                         onChangeText={setPassword}
                     />
                 </View>
-                <View style={styles.subContainer}>
-                    <Button
-                        style={styles.textInput}
-                        icon={
-                            <Icon
-                                name="input"
-                                size={15}
-                                color="white"
-                            />
-                        }
-                        title="Login"
-                        onPress={() => login()} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Forgot Password?</Text>
-                </View>
-                <View style={styles.subContainer}>
-                    <Button
-                        style={styles.textInput}
-                        icon={
-                            <Icon
-                                name="refresh"
-                                size={15}
-                                color="white"
-                            />
-                        }
+
+                
+                <TouchableHighlight style={styles.loginButton}
+                    activeOpacity={0.6}
+                    underlayColor="#1ABC9C"
+                    title="Login"
+                    onPress={() => login()}
+                >
+                    <View style={styles.loginButton}>
+                        <Image
+                            style={{ width: 20, height: 20, marginRight: 8}}
+                            source={require('../../images/icons/lock.png')}
+                        />
+                        <Text style={{ color: '#1ABC9C', fontStyle: 'italic', fontWeight: '700', fontSize: 20 }}>
+                            Login
+                        </Text>
+                    </View>
+                    
+                </TouchableHighlight>
+                <View style={styles.row}>
+                    <TouchableHighlight
+                        style={styles.links}
+                        activeOpacity={0.6}
+                        underlayColor="#1ABC9C"
                         title="Reset Password"
                         onPress={() => {
                             navigation.navigate('Reset');
-                        }} />
-                </View>
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Not a user?</Text>
-                </View>
-                <View style={styles.subContainer}>
-                    <Button
-                        style={styles.textInput}
-                        icon={
-                            <Icon
-                                name="check-circle"
-                                size={15}
-                                color="white"
-                            />
-                        }
+                        }}
+                    >
+                        <Text style={styles.links}>
+                            Forgot Password?
+                        </Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight
+                        style={styles.links}
+                        activeOpacity={0.6}
+                        underlayColor="#1ABC9C"
                         title="Register"
                         onPress={() => {
                             navigation.navigate('Register');
-                        }} />
+                        }}
+                    >
+                        <Text style={styles.links}>
+                            Not a user?
+                        </Text>
+                    </TouchableHighlight>
                 </View>
                 {showLoading &&
                     <View style={styles.activity}>
@@ -117,28 +121,70 @@ export default function Login({ navigation }) {
             </View>
         </View>
     );
-    
-    
 }
 
-Login.navigationOptions = ({ navigation }) => ({
-    title: 'Login',
-    headerShown: false,
-});
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#1ABC9C',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    formContainer: {
-        height: 400,
-        padding: 20
+    logo: {
+        height: 6*(deviceHeight/10),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    subContainer: {
-        marginBottom: 20,
-        padding: 5,
+    logoText: {
+        color: 'white',
+        fontStyle: 'italic',
+        fontWeight: '700',
+        fontSize: 60
+    },
+    login: {
+        height: 4*(deviceHeight/10),
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        marginLeft: deviceWidth/10,
+        marginRight: deviceWidth/10,
+        paddingBottom: deviceHeight/15
+    },
+    form: {
+        flexDirection: 'row',
+        height: deviceHeight/20,
+        width: 8*(deviceWidth/10),
+        alignItems: 'center',
+        fontSize: 18,
+        alignSelf: 'stretch',
+        borderBottomColor: 'white',
+        borderBottomWidth: 1,
+    },
+    input: {
+        color: 'white'
+    },
+    loginButton: {
+        flexDirection: 'row',
+        height: deviceHeight/20,
+        width: deviceWidth/1.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        fontSize: 18,
+        borderRadius: 50,
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        alignSelf: 'stretch'
+    },
+    links: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        fontSize: 14,
     },
     activity: {
         position: 'absolute',
@@ -147,11 +193,6 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         alignItems: 'center',
-        justifyContent: 'center'
-    },
-    textInput: {
-        fontSize: 18,
-        margin: 5,
-        width: 200
+        justifyContent: 'center',
     },
 })

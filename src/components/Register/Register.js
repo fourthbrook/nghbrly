@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
-import { StyleSheet, ActivityIndicator, View, Text, Alert } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
 export default function Register({ navigation }) {
+
+    const popAction = () => {
+        navigation.dispatch(StackActions.pop(1));
+    }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cPassword, setcPassword] = useState('');
     const [showLoading, setShowLoading] = useState(false);
+
+    const passCheck = () => {
+        if ( cPassword != password) {
+            Alert.alert(
+                'Please make sure your passwords match!'
+            );
+        } else {
+            register()
+        }
+
+    };
 
     const register = async() => {
         setShowLoading(true);
@@ -27,7 +46,67 @@ export default function Register({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
+            <View style={styles.container}>
+                <View style={styles.topMenu}>
+                    <TouchableHighlight style={styles.back}
+                        activeOpacity={0.6}
+                        underlayColor="#1ABC9C"
+                        onPress={popAction}
+                    >
+                        <Image style={styles.back}
+                            source={require('../../images/icons/back.png')}
+                        />
+                    </TouchableHighlight>
+                </View>
+                <View style={styles.logo}>
+                    <Text style={styles.logoText}>
+                        profile
+                    </Text>
+                </View>
+                <View style={styles.loginContainer}>
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Your Email'
+                        value={email}
+                        onChangeText={setEmail}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Your Password'
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Confirm Password'
+                        secureTextEntry={true}
+                        value={cPassword}
+                        onChangeText={setcPassword}
+                    />
+
+
+                    <TouchableHighlight style={styles.textInput}
+                        activeOpacity={0.6}
+                        underlayColor="#1ABC9C"
+                        title="Register"
+                        onPress = {passCheck}
+                    >
+                        <Text>
+                            Register
+                        </Text>
+                    </TouchableHighlight>
+                </View>
+            </View>
+
+
+
+
+
+
+
+
+            {/* <View style={styles.formContainer}>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontSize: 28, height: 50 }}>Register Here!</Text>
                 </View>
@@ -46,7 +125,7 @@ export default function Register({ navigation }) {
                     />
                 </View>
                 <View style={styles.subContainer}>
-                    <Input
+                    <TextInput
                         style={styles.textInput}
                         placeholder='Your Password'
                         leftIcon={
@@ -96,42 +175,42 @@ export default function Register({ navigation }) {
                         <ActivityIndicator size="large" color="#0000ff" />
                     </View>
                 }
-            </View>
+            </View> */}
         </View>
     );
 }
-
-Register.navigationOptions = ({ navigation }) => ({
-    title: 'Register',
-    headerShown: false,
-});
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: '#1ABC9C'
     },
-    formContainer: {
-        height: 400,
-        padding: 20
-    },
-    subContainer: {
-        marginBottom: 20,
-        padding: 5,
-    },
-    activity: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        alignItems: 'center',
+    topMenu: {
+        height: deviceHeight/10,
+        marginLeft: deviceWidth/30,
+        marginRight: deviceWidth/30,
         justifyContent: 'center'
     },
-    textInput: {
-        fontSize: 18,
-        margin: 5,
-        width: 200
+    back: {
+        height: deviceHeight/15,
+        width: deviceHeight/15,
     },
-})
+    logo: {
+        height: 2*(deviceHeight/10),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logoText: {
+        color: 'white',
+        fontStyle: 'italic',
+        fontWeight: '700',
+        fontSize: 60
+    },
+    loginContainer: {
+        height: 7*(deviceHeight/10),
+        alignItems: 'center',
+        justifyContent: 'space-around'
+
+    }
+});

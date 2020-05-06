@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
+import React, { Component } from 'react';
+import { 
     StyleSheet,
     View,
     Image,
@@ -7,86 +7,69 @@ import {
     Dimensions,
     TouchableHighlight
 } from 'react-native';
+import { StackActions } from 'react-navigation';
 import auth from '@react-native-firebase/auth';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
-export default function Home({ navigation }) {
-    
-    const profileHandler = () => {
-        navigation.navigate('Profile');
+export default function Profile({ navigation }) {
+
+    const popAction = () => {
+        navigation.dispatch(StackActions.pop(1));
     }
 
-    const settingsHandler = () => {
-        navigation.navigate('Settings');
+    const signOut = () => {
+       auth().signOut();
+       navigation.navigate('Login');
     }
 
     return(
         <View style={styles.container}>
             <View style={styles.topMenu}>
-                <TouchableHighlight style={styles.profile}
+                <TouchableHighlight style={styles.back}
                     activeOpacity={0.6}
                     underlayColor="#1ABC9C"
-                    onPress={profileHandler}
+                    onPress={popAction}
                 >
-                    <Image style={styles.profile}
-                        source={require('../../images/icons/user.png')}
-                    />
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.settings}
-                    activeOpacity={0.6}
-                    underlayColor="#1ABC9C"
-                    onPress={settingsHandler}
-                >
-                    <Image style={styles.settings}
-                        source={require('../../images/icons/settings.png')}
+                    <Image style={styles.back}
+                        source={require('../../images/icons/back.png')}
                     />
                 </TouchableHighlight>
             </View>
             <View style={styles.logo}>
                 <Text style={styles.logoText}>
-                    nghbrly
+                    profile
                 </Text>
             </View>
             <View style={styles.buttons}>
+                
                 <TouchableHighlight style={styles.button}
-                    //onPress={profileHandler}
+                    onPress={signOut}
                 >
                     <Text style={styles.buttonText}>
-                        LEND A HAND
-                    </Text>
-                </TouchableHighlight>
-                <TouchableHighlight style={styles.button}
-                    //onPress={profileHandler}
-                >
-                    <Text style={styles.buttonText}>
-                        REQUEST A HAND
+                        Sign Out
                     </Text>
                 </TouchableHighlight>
             </View>
         </View>
-    )
+    )  
 }
+
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: '#1ABC9C'
     },
     topMenu: {
-        flexDirection: 'row',
+        height: deviceHeight/10,
         marginLeft: deviceWidth/30,
         marginRight: deviceWidth/30,
-        height: deviceHeight/10,
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        justifyContent: 'center'
     },
-    profile: {
-        height: deviceHeight/15,
-        width: deviceHeight/15,
-    },
-    settings: {
+    back: {
         height: deviceHeight/15,
         width: deviceHeight/15,
     },
@@ -123,22 +106,4 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 30
     }
-
-
-
 });
-
-
-// Home.navigationOptions = ({ navigation }) => ({
-//     title: 'Home',
-//     headerRight: () => <Button
-//             buttonStyle={{ padding: 0, marginRight: 20, backgroundColor: 'transparent' }}
-//             icon={
-//                 <Icon
-//                     name="cancel"
-//                     size={28}
-//                     color="white"
-//                 />
-//             }
-//             onPress={() => {auth().signOut()}} />,
-// });
