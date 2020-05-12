@@ -81,6 +81,8 @@ target 'nghbrly' do
 
   pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
 
+  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
+
   target 'nghbrlyTests' do
     inherit! :complete
     # Pods for testing

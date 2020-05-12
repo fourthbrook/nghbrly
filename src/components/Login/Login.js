@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions  } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions, KeyboardAvoidingView} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 let deviceHeight = Dimensions.get('window').height;
@@ -32,7 +32,7 @@ export default function Login({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <View style={styles.logo}>
                 <Text style={styles.logoText}>
                     nghbrly
@@ -119,7 +119,7 @@ export default function Login({ navigation }) {
                     </View>
                 }
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
         height: 6*(deviceHeight/10),
         justifyContent: 'center',
         alignItems: 'center',
+        paddingBottom: 40,
+        padding: 40
     },
     logoText: {
         color: 'white',
@@ -162,7 +164,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     input: {
-        color: 'white'
+        color: 'white',
+        width: 7*(deviceWidth/10),
     },
     loginButton: {
         flexDirection: 'row',

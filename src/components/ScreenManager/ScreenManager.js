@@ -6,7 +6,7 @@ import Register from '../Register/Register';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile';
 // import Settings from '../Settings/Settings';
-// import Reset from '../Reset/Reset';
+import Reset from '../Reset/Reset';
 
 const ScreenManager = createStackNavigator({
     Splash: {
@@ -28,9 +28,9 @@ const ScreenManager = createStackNavigator({
     // Settings: {
     //     screen: Settings
     // },
-    // Reset: {
-    //     screen: Reset
-    // },
+    Reset: {
+        screen: Reset
+    },
 
 }, {headerMode: 'none'});
 
