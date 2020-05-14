@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     back: {
-        height: deviceHeight/15,
-        width: deviceHeight/15,
+        height: deviceHeight/20,
+        width: deviceHeight/20,
     },
     logo: {
         height: 6*(deviceHeight/10),

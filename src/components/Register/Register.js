@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions, KeyboardAvoidingView, Picker,} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import ModalFilterPicker from 'react-native-modal-filter-picker'
 
 
 let deviceHeight = Dimensions.get('window').height;
@@ -26,7 +25,7 @@ export default function Register({ navigation }) {
     const [showLoading, setShowLoading] = useState(false);
 
     const passCheck = () => {
-        if((cPassword != password) && (neighborhood == neighborhood.valueOf('neighborhood'))) {
+        if((cPassword != password) && (neighborhood === 'neighborhod')) {
             Alert.alert(
                 'Please make sure your passwords match and select a neighborhood!'
             );
@@ -54,7 +53,7 @@ export default function Register({ navigation }) {
                     email: email,
                     firstName: firstName,
                     lastName: lastName,
-                    neighborhod: neighborhood
+                    neighborhood: neighborhood
 
                 }
 
@@ -74,22 +73,27 @@ export default function Register({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.topMenu}>
-                <TouchableHighlight style={styles.back}
-                    activeOpacity={0.6}
-                    underlayColor="#1ABC9C"
-                    onPress={() => {navigation.navigate('Login')}}
-                >
-                    <Image style={styles.back}
-                        source={require('../../images/icons/back.png')}
-                    />
-                </TouchableHighlight>
-            </View>
-            <KeyboardAvoidingView style={styles.container} behavior={'height'}>
-                <View style={styles.logo}>
+                <View style={styles.menuBuffer}>
+                    <TouchableHighlight style={styles.back}
+                        activeOpacity={0.6}
+                        underlayColor="#1ABC9C"
+                        onPress={() => {navigation.navigate('Login')}}
+                    >
+                        <Image style={styles.back}
+                            source={require('../../images/icons/back.png')}
+                        />
+                    </TouchableHighlight>
+                </View>
+                <View style={styles.menuBuffer2}>
                     <Text style={styles.logoText}>
                         register
                     </Text>
                 </View>
+                <View style={styles.menuBuffer}>
+                    
+                </View>  
+            </View>
+            <KeyboardAvoidingView behavior={'padding'}>
                 <View style={styles.register}>
                     <View style={styles.form}>
                         <Image
@@ -130,13 +134,13 @@ export default function Register({ navigation }) {
                             onValueChange={(itemValue, itemIndex) => setNeighborhood(itemValue)}
                         >
                             <Picker.Item label="Neighborhood" value="neighborhood" />
-                            <Picker.Item label="Brooklyn" value="brooklyn" />
-                            <Picker.Item label="Bushwick" value="bushwick" />
-                            <Picker.Item label="Bedstuy" value="bedstuy" />
-                            <Picker.Item label="Williamsburg" value="williamsburg" />
-                            <Picker.Item label="East Williamsburg" value="east williamsburg" />
-                            <Picker.Item label="Ridgewood" value="ridgewood" />
-                            <Picker.Item label="Lower East Side" value="lower east side" />
+                            <Picker.Item label="Brooklyn" value="Brooklyn" />
+                            <Picker.Item label="Bushwick" value="Bushwick" />
+                            <Picker.Item label="Bedstuy" value="Bedstuy" />
+                            <Picker.Item label="Williamsburg" value="Williamsburg" />
+                            <Picker.Item label="East Williamsburg" value="East Williamsburg" />
+                            <Picker.Item label="Ridgewood" value="Ridgewood" />
+                            <Picker.Item label="Lower East Side" value="Lower East Side" />
 
 
                         </Picker>
@@ -182,24 +186,22 @@ export default function Register({ navigation }) {
                             onChangeText={setcPassword}
                         />
                     </View>
-                    <TouchableHighlight style={styles.loginButton}
-                        activeOpacity={0.6}
-                        underlayColor="#1ABC9C"
-                        title="Register"
-                        onPress = {passCheck}
-                    >
-                        <View style={styles.loginButton}>
-                            <Image
-                                style={{ width: 20, height: 20, marginRight: 8}}
-                                source={require('../../images/icons/lock.png')}
-                            />
-                            <Text style={{ color: '#1ABC9C', fontStyle: 'italic', fontWeight: '700', fontSize: 20 }}>
-                                Register
-                            </Text>
-                        </View>
-                    </TouchableHighlight>
+                    
                 </View>
             </KeyboardAvoidingView>
+            <View style={styles.buttons}>
+
+                <TouchableHighlight style={styles.button}
+                    activeOpacity={0.6}
+                    underlayColor="#1ABC9C"
+                    title="Register"
+                    onPress = {passCheck}
+                >
+                    <Text style={styles.buttonText}>
+                        register
+                    </Text>
+                </TouchableHighlight>
+            </View>
         </View>
     );
 }
@@ -211,34 +213,45 @@ const styles = StyleSheet.create({
         backgroundColor: '#1ABC9C'
     },
     topMenu: {
+        flexDirection: 'row',
         height: deviceHeight/10,
-        marginLeft: deviceWidth/30,
-        marginRight: deviceWidth/30,
-        justifyContent: 'center',
-        backgroundColor: '#1ABC9C'
-    },
-    back: {
-        height: deviceHeight/15,
-        width: deviceHeight/15,
-    },
-    logo: {
-        height: 2*(deviceHeight/10),
+        paddingLeft: deviceWidth/30,
+        paddingRight: deviceWidth/30,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#1ABC9C'
+    },
+    menuBuffer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    menuBuffer2: {
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    back: {
+        height: deviceHeight/20,
+        width: deviceHeight/20,
+        alignSelf: 'flex-start',
+        justifyContent: 'center'
     },
     logoText: {
         color: 'white',
         fontStyle: 'italic',
         fontWeight: '700',
-        fontSize: 60
+        fontSize: 40
     },
     register: {
-        height: 7*(deviceHeight/10),
+        height: 5*(deviceHeight/10),
         alignItems: 'center',
         justifyContent: 'space-around',
         marginLeft: deviceWidth/10,
         marginRight: deviceWidth/10,
-        paddingBottom: deviceHeight/15
+        marginTop: deviceHeight/5
     },
     form: {
         flexDirection: 'row',
@@ -254,14 +267,27 @@ const styles = StyleSheet.create({
         color: 'white',
         width: 7*(deviceWidth/10),
     },
-    loginButton: {
-        flexDirection: 'row',
-        height: deviceHeight/20,
-        width: deviceWidth/1.5,
-        alignItems: 'center',
+    buttons: {
+        height:2*(deviceHeight/10),
+        paddingLeft: deviceWidth/20,
+        paddingRight: deviceWidth/20,
+        paddingTop: deviceWidth/20,
+        paddingBottom: deviceWidth/20,
         justifyContent: 'center',
-        backgroundColor: 'white',
-        fontSize: 18,
-        borderRadius: 50,
     },
+
+    button:{
+        height: deviceHeight/20,
+        backgroundColor: 'white',
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonText:{
+        color: '#1ABC9C',
+        fontStyle: 'italic',
+        fontWeight: '700',
+        fontSize: 18
+    }
+    
 });

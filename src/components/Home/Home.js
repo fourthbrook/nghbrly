@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         paddingLeft: deviceWidth/20,
         paddingRight: deviceWidth/20,
         paddingTop: deviceWidth/20,
-        paddingBottom: deviceWidth/20,
+        paddingBottom: deviceWidth/15,
         justifyContent: 'space-around',
     },
     button:{
