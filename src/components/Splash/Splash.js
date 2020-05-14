@@ -33,16 +33,4 @@ export default function Splash({ navigation }) {
     // );
 }
 
-Splash.navigationOptions = ({ navigation }) => ({
-    title: 'Splash',
-    headerRight: () => <Button
-            buttonStyle={{ padding: 0, marginRight: 20, backgroundColor: 'transparent' }}
-            icon={
-                <Icon
-                    name="cancel"
-                    size={28}
-                    color="white"
-                />
-            }
-            onPress={() => {auth().signOut()}} />,
-});
+

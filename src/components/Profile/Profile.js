@@ -37,8 +37,7 @@ export default function Profile({ navigation }) {
     useEffect(() => {
         
         users.doc(user.uid).get()
-            .then((doc)=>{
-                    console.log(doc.data().firstName)   
+            .then((doc)=>{  
                     setFirst(doc.data().firstName)
                     setLast(doc.data().lastName)
                     setNeigh(doc.data().neighborhood)
