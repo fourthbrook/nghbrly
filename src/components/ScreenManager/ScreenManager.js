@@ -5,7 +5,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Home from '../Home/Home';
 import Profile from '../Profile/Profile';
-// import Settings from '../Settings/Settings';
+import Settings from '../Settings/Settings';
 import Reset from '../Reset/Reset';
 
 const ScreenManager = createStackNavigator({
@@ -25,9 +25,9 @@ const ScreenManager = createStackNavigator({
     Profile: {
         screen: Profile
     },
-    // Settings: {
-    //     screen: Settings
-    // },
+    Settings: {
+        screen: Settings
+    },
     Reset: {
         screen: Reset
     },

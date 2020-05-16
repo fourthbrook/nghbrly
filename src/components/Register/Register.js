@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, ActivityIndicator, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions, KeyboardAvoidingView, Picker,} from 'react-native';
+import { StyleSheet, View, Text, Alert, TextInput, TouchableHighlight, Image, Dimensions, KeyboardAvoidingView} from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 

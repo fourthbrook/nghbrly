@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     View,
     Image,
     Text,
     Dimensions,
-    TouchableHighlight
+    TouchableHighlight,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
 
 let deviceHeight = Dimensions.get('window').height;
 let deviceWidth = Dimensions.get('window').width;
 
 export default function Home({ navigation }) {
-    
+ 
     const profileHandler = () => {
         navigation.navigate('Profile');
     }
@@ -51,14 +50,18 @@ export default function Home({ navigation }) {
             </View>
             <View style={styles.buttons}>
                 <TouchableHighlight style={styles.button}
-                    //onPress={profileHandler}
+                    onPress={() => {
+                        alert('Feature not yet implamented')
+                    }}
                 >
                     <Text style={styles.buttonText}>
                         LEND A HAND
                     </Text>
                 </TouchableHighlight>
                 <TouchableHighlight style={styles.button}
-                    //onPress={profileHandler}
+                    onPress={() => {
+                        alert('Feature not yet implamented')
+                    }}
                 >
                     <Text style={styles.buttonText}>
                         REQUEST A HAND
@@ -127,18 +130,3 @@ const styles = StyleSheet.create({
 
 
 });
-
-
-// Home.navigationOptions = ({ navigation }) => ({
-//     title: 'Home',
-//     headerRight: () => <Button
-//             buttonStyle={{ padding: 0, marginRight: 20, backgroundColor: 'transparent' }}
-//             icon={
-//                 <Icon
-//                     name="cancel"
-//                     size={28}
-//                     color="white"
-//                 />
-//             }
-//             onPress={() => {auth().signOut()}} />,
-// });

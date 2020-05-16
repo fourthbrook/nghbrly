@@ -83,6 +83,8 @@ target 'nghbrly' do
 
   pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
 
+  pod 'RNCPicker', :path => '../node_modules/@react-native-community/picker'
+
   target 'nghbrlyTests' do
     inherit! :complete
     # Pods for testing
